@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		char[][] tab = new char[3][3];
 		int rodada = 1;
-		boolean fim = false;
+		int fim = 0;
 		char jogador;
 		Scanner sc = new Scanner(System.in);
 
@@ -36,19 +36,21 @@ public class Main {
 					&& tab[linha - 1][coluna - 1] == ' ') {
 				tab[linha - 1][coluna - 1] = jogador;
 				if (rodada >= 5) {
-					fim = validarTriunfo(tab);
+					fim = validarTriunfo(tab, rodada);
 				}
-				if (fim == false) {
+				if (fim == 0) {
 					rodada++;
-				} else {
+				} else if (fim == 1) {
 					exibirTabuleiro(tab);
 					System.out.printf("Parabéns jogador %c, VOCÊ VENCEU!!\n", jogador);
-
+				} else {
+					exibirTabuleiro(tab);
+					System.out.println("Deu velha!");
 				}
 			} else {
 				System.out.printf("Jogada inválida!\njogue novamente.\n");
 			}
-		} while (fim == false);
+		} while (fim == 0);
 	}
 
 	public static void exibirTabuleiro(char[][] tabuleiro) {
@@ -66,23 +68,26 @@ public class Main {
 		}
 	}
 
-	public static boolean validarTriunfo(char[][] tabuleiro) {
+	public static int validarTriunfo(char[][] tabuleiro, int rodada) {
 		for (int i = 0; i < tabuleiro.length; i++) {
 			if (tabuleiro[i][0] == tabuleiro[i][1] && tabuleiro[i][0] == tabuleiro[i][2] && tabuleiro[i][0] != ' ') {
-				return true;
+				return 1;
 			}
 			if (tabuleiro[0][i] == tabuleiro[1][i] && tabuleiro[0][i] == tabuleiro[2][i] && tabuleiro[0][i] != ' ') {
-				return true;
+				return 1;
 			}
 		}
 		if (tabuleiro[1][1] != ' ') {
 			if (tabuleiro[0][0] == tabuleiro[1][1] && tabuleiro[1][1] == tabuleiro[2][2]) {
-				return true;
+				return 1;
 			}
 			if (tabuleiro[0][2] == tabuleiro[1][1] && tabuleiro[1][1] == tabuleiro[2][0]) {
-				return true;
+				return 1;
 			}
 		}
-		return false;
+		if (rodada == 9) {
+			return 2;
+		}
+		return 0;
 	}
 }
