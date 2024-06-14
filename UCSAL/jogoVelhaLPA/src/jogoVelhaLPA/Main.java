@@ -1,4 +1,4 @@
-//Alunos: Raphael Maurício, Romualdo Júnior, Felipe Gabriel, Guilherme Felicíssimo
+//Alunos: Raphael Maurício, Romualdo Junior, Felipe Gabriel, Guilherme Felicíssimo
 
 package jogoVelhaLPA;
 
@@ -27,9 +27,9 @@ public class Main {
 			}
 			System.out.printf("--- Jogo da velha ----\nRodada: %d\nJogador: %c\n\n", rodada, jogador);
 			exibirTabuleiro(tab);
-			System.out.println("Digite a linha:");
+			System.out.println("Digite a linha (1 a 3):");
 			int linha = sc.nextInt();
-			System.out.println("Digite a coluna:");
+			System.out.println("Digite a coluna (1 a 3):");
 			int coluna = sc.nextInt();
 
 			if (linha > 0 && linha <= tab.length && coluna > 0 && coluna <= tab.length
@@ -42,7 +42,7 @@ public class Main {
 					rodada++;
 				} else if (fim == 1) {
 					exibirTabuleiro(tab);
-					System.out.printf("Parabéns jogador %c, VOCÊ VENCEU!!\n", jogador);
+					System.out.println("Parabéns jogador "+ jogador + ", VOCÊ VENCEU!!");
 				} else {
 					exibirTabuleiro(tab);
 					System.out.println("Deu velha!");
